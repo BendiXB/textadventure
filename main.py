@@ -17,25 +17,25 @@ class welt():
     #def rndgegner(self):
 
 class wesen():
-    def __init__(self, name, leben, schaden, asciiart):
+    def __init__(self, name,  asciiart):
         self.name = name
-        self.leben = leben
-        self.schaden = schaden
         self.asciiart = asciiart
 
 
+class spieler(wesen):
+    def __init__(self, name, asciiart):
+        self.leben = 20
+        self.maxleben = 20
+        self.schaden = 10
+        super().__init__( name,  asciiart)
+
+class monster(wesen):
+    def __init__(self, name, asciiart, leben, schaden):
+        self.leben = leben
+        self.schaden = schaden
+        super().__init__(name,asciiart)
 
 
-"""
-class spieler():        #erbt von wesen
-    def __init__(self):
-        #etwas
-
-class monster():        # erbt von wesen
-    def __init__(self):
-        #etwas
-
-"""
 
 
 
