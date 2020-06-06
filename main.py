@@ -1,14 +1,3 @@
-class spiel():
-    def __init__(self):
-        self.eingabe = 0
-        self.version = 0.1
-        self.credits= ("Bendix und Oscar")
-    def start(self):
-        self.eingabe= input("Was willst du?")
-        print(self.eingabe)
-    #def shop(self):       #noch in arbeit
-
-
 class welt():
     def __init__(self, lootmult, monstermult, gegnerbisloot ):
         self.lootmult = lootmult
@@ -35,8 +24,24 @@ class monster(wesen):
         self.schaden = schaden
         super().__init__(name,asciiart)
 
+asciispieler="x["
 
+class spiel():
+    def __init__(self):
+        self.eingabe ="ka lass dir was einfallen"
+        self.version = 0.1
+        self.credits= ("Bendix und Oscar")
+    def start(self):
+        self.eingabe= input("Hallo Fremder... \nWie draf ich dich nennen? \n")
+        LocalSpieler=spieler(self.eingabe, asciispieler)
+        self.eingabe = input()
+        if self.eingabe == "1":
+            print("wilkommen in der welt")
+        else:
+            print("Du bist im Laden")
+a="xD"
+Monster1 = monster("Wolf", a, 20, 1)
 
-
-
+Session1 = spiel()
+Session1.start()
 
