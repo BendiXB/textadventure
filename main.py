@@ -58,13 +58,15 @@ class welt():
         if x == 1:
             nextgegner=Monster1
         elif x == 2:
-            nextgegner=Monster1
+            nextgegner=Monster2
         elif x == 3:
-            nextgegner=Monster1
+            nextgegner=Monster3
         elif x == 4:
-            nextgegner=Monster1
+            nextgegner=Monster4
         elif x == 5:
-            nextgegner=Monster1
+            nextgegner=Monster5
+
+
         print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[1] oder ihn angreifen[2]\n")
         i = input()
         if i == "1":
@@ -159,10 +161,15 @@ class spiel():
                 print("Du bist im Laden")
 
 
-a="xD"
-Monster1 = monster("Wolf", a, 20, 15)
+a="xD" # placeholder ascciart
+
+Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
+Monster2 = monster("Baer", asciiart.bär, 20, 8)
+Monster3 = monster("Drache", a, 30, 20 )
+Monster4 = monster("Kaktus", a, 30, 1)
+Monster5 = monster("Fuchs", a, 10, 5)
 World1= welt("Wald",1,1,1)
-#isinstance()
+
 
 Session1 = spiel()
 Session1.start()
