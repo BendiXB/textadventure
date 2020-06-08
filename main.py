@@ -54,6 +54,7 @@ class welt():
         self.monstermult = monstermult
         self.gegnerbisloot = gegnerbisloot
     def erkunden(self, spieler):
+
         x = randint(1,5)
         if x == 1:
             nextgegner=Monster1
@@ -66,7 +67,6 @@ class welt():
         elif x == 5:
             nextgegner=Monster5
 
-
         print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[1] oder ihn angreifen[2]\n")
         i = input()
         if i == "1":
@@ -75,9 +75,9 @@ class welt():
                 print("du kannst wegrennen!! glück gehabt!!")
             else:
                 print("Du du bist zu langsam um zu rennen der gegner holt dich ein")
-                nextgegner.angreifen(spieler)
+                nextgegner.angreifen(spieler,self.monstermult)
         if i == "2":
-            spieler.angreifen(nextgegner)
+            spieler.angreifen(nextgegner,self.monstermult)
 
 
 
@@ -91,27 +91,40 @@ class wesen():
     def __init__(self, name,  asciiart):
         self.name = name
         self.asciiart = asciiart
-    def angreifen(self, gegner):                        # Der angreifer landet den First hit
-        while self.leben >0 and gegner.leben >0:
-            gegner.leben= gegner.leben - self.schaden
-            if self.leben >0 and gegner.leben >0:
-                self.leben=self.leben-gegner.schaden
-            print(self.leben,"Leben von:",self.name,"    ",gegner.leben,"Leben von:",gegner.name)
-
-
-        if self.leben >0:
-            print(self.name, " hat gewonnen #angreifen func")
-            if isinstance(self, spieler):
-                gegner.sterben()
-            if isinstance(self, monster):
+    def angreifen(self, gegner, monstermult):                        # Der angreifer landet den First hit
+        if isinstance(self, spieler):       #Der spieler greift an
+            gegner.leben=gegner.leben*monstermult
+            gegner.schaden=gegner.schaden*monstermult
+            while self.leben > 0 and gegner.leben > 0:
+                gegner.leben = gegner.leben - self.schaden
+                if self.leben > 0 and gegner.leben > 0:
+                    self.leben = self.leben - gegner.schaden
+                print(self.leben, "Leben von:", self.name, "    ", gegner.leben, "Leben von:", gegner.name)
+            if self.leben <=0:
+                print("du bist gestorben")
                 self.sterben()
-                gegner.sterben()
+                gegner.reset()
+            else:
+                print("du hast gewonnen ")
+                gegner.reset()
 
+        elif isinstance(self, monster):     #Das monster greift an
+            self.leben=self.leben*monstermult
+            self.schaden=self.schaden*monstermult
+            while self.leben > 0 and gegner.leben > 0:
+                gegner.leben = gegner.leben - self.schaden
+                if self.leben > 0 and gegner.leben > 0:
+                    self.leben = self.leben - gegner.schaden
+                print(self.leben, "Leben von:", self.name, "    ", gegner.leben, "Leben von:", gegner.name)
+            if self.leben <= 0:
+                print("Du hast gewonnen")
+                gegner.reset()
+            else:
+                print("Du hast verloren ")
+                self.sterben()
+                gegner.reset()
         else:
-            print(gegner.name,"hat gewonnen #angreifen func")
-            if isinstance(gegner, monster):
-                self.sterben()
-                gegner.sterben()
+            print("fehler angreifen anfang")
 
 
 
@@ -135,9 +148,11 @@ class monster(wesen):
         self.leben = leben
         self.maxleben = leben
         self.schaden = schaden
+        self.maxschaden=schaden
         super().__init__(name,asciiart)
-    def sterben(self):
+    def reset(self):
         self.leben=self.maxleben
+        self.schaden=self.maxschaden
 
 
 
@@ -168,7 +183,7 @@ Monster2 = monster("Baer", asciiart.bär, 20, 8)
 Monster3 = monster("Drache", a, 30, 20 )
 Monster4 = monster("Kaktus", a, 30, 1)
 Monster5 = monster("Fuchs", a, 10, 5)
-World1= welt("Wald",1,1,1)
+World1= welt("Wald",1,0.3,1)
 
 
 Session1 = spiel()
