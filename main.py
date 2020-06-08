@@ -12,7 +12,6 @@ class asciiart():
   / / / _ \| |/_/ __/  / /| |/ __  / | / / _ \/ __ \/ __/ / / / ___/ _ \
  / / /  __/>  </ /_   / ___ / /_/ /| |/ /  __/ / / / /_/ /_/ / /  /  __/
 /_/  \___/_/|_|\__/  /_/  |_\__,_/ |___/\___/_/ /_/\__/\__,_/_/   \___/ 
-
     """
     wolf = """
                         ,     ,
@@ -46,6 +45,34 @@ class asciiart():
      .'     ;..'            .'       `.'`
     `.......'              `........-'`
     '''
+
+'''
+Check Klasse
+Funktionen, die humorvoll auf Datentypen prüfen
+'''
+class check():
+    def blame(inputtocheck):
+        print('Ernsthaft??')
+        print(inputtocheck,' Das ist kein ordentliches Input. Lern lesen...')
+        return False
+
+    def string(inputtocheck):
+        if isinstance(inputtocheck, str):
+            return True
+        else:
+            check.blame(inputtocheck)
+
+    def intenger(inputtocheck):
+        if isinstance(inputtocheck, int):
+            return True
+        else:
+            check.blame(inputtocheck)
+
+    def inlist(inputtocheck, list):
+        if inputtocheck in str(list):
+            return True
+        else:
+            check.blame(inputtocheck)
 
 class welt():
     def __init__(self,name, lootmult, monstermult, gegnerbisloot ):
