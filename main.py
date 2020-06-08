@@ -54,35 +54,35 @@ class welt():
         self.monstermult = monstermult
         self.gegnerbisloot = gegnerbisloot
     def erkunden(self, spieler):
-
-        x = randint(1,5)
-        if x == 1:
-            nextgegner=Monster1
-        elif x == 2:
-            nextgegner=Monster2
-        elif x == 3:
-            nextgegner=Monster3
-        elif x == 4:
-            nextgegner=Monster4
-        elif x == 5:
-            nextgegner=Monster5
-
-        print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[1] oder ihn angreifen[2]\n")
-        i = input()
-        if i == "1":
-            x = randint(1,3)
+        print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
+              "Gegner besigen bis du den Loot bekommst.\n dafür bekommst du aber auch die ", self.lootmult,
+              "- menge an Loot.")
+        for i in range(self.gegnerbisloot):
+            x = randint(1,5)
             if x == 1:
-                print("du kannst wegrennen!! glück gehabt!!")
-            else:
-                print("Du du bist zu langsam um zu rennen der gegner holt dich ein")
-                nextgegner.angreifen(spieler,self.monstermult)
-        if i == "2":
-            spieler.angreifen(nextgegner,self.monstermult)
+                nextgegner=Monster1
+            elif x == 2:
+                nextgegner=Monster2
+            elif x == 3:
+                nextgegner=Monster3
+            elif x == 4:
+                nextgegner=Monster4
+            elif x == 5:
+                nextgegner=Monster5
 
-
-
-
-
+            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[1] oder ihn angreifen[2]\n")
+            i = input()
+            if i == "2":
+                x = randint(1,3)
+                if x == 1:
+                    print("du kannst wegrennen!! glück gehabt!!")
+                else:
+                    print("Du du bist zu langsam um zu rennen der gegner holt dich ein")
+                    nextgegner.angreifen(spieler,self.monstermult)
+            if i == "1":
+                spieler.angreifen(nextgegner,self.monstermult)
+            if spieler.leben <=0:
+                break
 
 
 
@@ -183,7 +183,7 @@ Monster2 = monster("Baer", asciiart.bär, 20, 8)
 Monster3 = monster("Drache", a, 30, 20 )
 Monster4 = monster("Kaktus", a, 30, 1)
 Monster5 = monster("Fuchs", a, 10, 5)
-World1= welt("Wald",1,0.3,1)
+World1= welt("Wald",1,0.3,2)
 
 
 Session1 = spiel()
