@@ -9,7 +9,7 @@ class asciiart():
     title = """
   ______          __     ___       __                 __                
  /_  __/__  _  __/ /_   /   | ____/ /   _____  ____  / /___  __________ 
-  / / / _ \| |/_/ __/  / /| |/ __  / | / / _ \/ __ \/ __/ / / / ___/ _ \
+  / / / _ \| |/_/ __/  / /| |/ __  / | / / _ \/ __ \/ __/ / / / ___/ _ |
  / / /  __/>  </ /_   / ___ / /_/ /| |/ /  __/ / / / /_/ /_/ / /  /  __/
 /_/  \___/_/|_|\__/  /_/  |_\__,_/ |___/\___/_/ /_/\__/\__,_/_/   \___/ 
     """
@@ -67,7 +67,83 @@ class asciiart():
 __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende abgeben
   |___\_/   /________//   ________         /  / ||_|_|_|
   |___ /   (|________/   |\_______\       /  /| |______|    [7] Weiter erkunden
-      /                  \|________)     /  / | |   """
+      /                  \|________)     /  / | |   
+"""
+
+    spieler = """
+        ___
+     __|___|__
+      ('o_o')
+      _\~-~/_    ______.
+     //\__/\ \ ~(_]---'
+    / )O  O( .\/_)
+    \ \    / \_/
+    )/_|  |_\.
+   // /(\/)\ \.
+   /_/      \_\.
+  (_||      ||_)
+    \| |__| |/
+     | |  | |
+     | |  | |
+     |_|  |_|
+     /_\  /_\.
+    """
+    tod = """
+              ___          
+            /   \\\\        
+       /\\\\ | . . \\\\       
+     ////\\\\|     ||       
+   ////   \\\\ ___//\       
+  ///      \\\\      \      
+ ///       |\\\\      |     
+//         | \\\\  \   \    1
+/          |  \\\\  \   \   
+           |   \\\\ /   /   
+           |    \/   /    
+           |     \\\\/|     
+           |      \\\\|     
+           |       \\\\     
+           |        |     
+           |_________\  
+    """
+    drache = """
+                        -,,,__
+                     \    ``~~--,,__                /   /
+                     /              ``~~--,,_     //--//
+          _,,,,-----,\              ,,,,---- >   (c  c)\\
+      ,;''            `\,,,,----''''   ,,-'''---/   /_ ;___        -,_
+     ( ''---,;====;,----/             (-,,_____/  /'/ `;   '''''----\ `:.
+     (                 '               `      (oo)/   ;~~~~~~~~~~~~~/--~
+      `;_           ;    \            ;   \   `  ' ,,'
+         ```-----...|     )___________|    )-----'''
+                    \   /             \   \\\\
+                    /  /,              `\   \\\\
+                   ,'---\ \              ,---`,;,
+                         ```
+    """
+
+    kaktus = """
+           *-*,
+       ,*\/|`| \\
+       \\'  | |'| *,
+        \ `| | |/ )
+         | |'| , /
+         |'| |, /
+       __|_|_|_|__
+      [___________]
+       |         |
+       |         |
+       |         |
+       |_________|
+    """
+
+    fox = """
+              /^._
+,___,--~~~~--' /'~
+`~--~\ )___,)/'
+    (/\\\\_  (/\\\\_
+    """
+
 '''
 Check Klasse
 Funktionen, die humorvoll auf Datentypen prüfen
@@ -102,15 +178,12 @@ class check():
         else:
             return False
 
-
-
 class welt():
     def __init__(self,name, lootmult, monstermult, gegnerbisloot ):
         self.name = name
         self.lootmult = lootmult
         self.monstermult = monstermult
         self.gegnerbisloot = gegnerbisloot
-
 
     def weltenauswahl(liste, spieler):
         print("\n\n\n\n\n\n\n\n\n\n")
@@ -120,14 +193,10 @@ class welt():
             print("Dafür sind deine Feinde aber ",liste[i].monstermult,"-mal so stark.")
             print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du den Loot bekommst.\n")
 
-
         x = int(input("\nin welche Welt willst du gehen?\n"))
         for i in range(len(liste)):
             if i == x +1:
                 liste[i].erkunden(spieler)
-
-
-
 
     def erkunden(self, spieler):
         print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
@@ -163,10 +232,6 @@ class welt():
             spieler.geld = spieler.geld + (10*self.lootmult)
         elif spieler.gestorben == True:
             spieler.sterben()
-
-
-
-
 
 class wesen():
     def __init__(self, name,  asciiart):
@@ -209,8 +274,6 @@ class wesen():
         else:
             print("fehler angreifen anfang")
 
-
-
 class spieler(wesen):
     def __init__(self, name, asciiart):
         self.geld = 0
@@ -226,8 +289,6 @@ class spieler(wesen):
         self.schaden = self.schaden*0.8
         print("\n\n\ndu bist gestorben deine eingeweide werden von einem hobby alchemisten aufgelesen\nund mit einer schnecke gekreuzt. Dadruch lebst du wieder, verlierst aber 20% deiner staerke!!\n\n\n")
 
-
-
 class monster(wesen):
     def __init__(self, name, asciiart, leben, schaden):
         self.leben = leben
@@ -239,10 +300,6 @@ class monster(wesen):
         self.leben=self.maxleben
         self.schaden=self.maxschaden
 
-
-
-asciispieler="x["
-
 class spiel():
     def __init__(self):
         self.lustvomspieler=1
@@ -252,7 +309,7 @@ class spiel():
     def start(self):
         print(asciiart.title)
         self.eingabe= input("Hallo Fremder... \nWie draf ich dich nennen? \n")
-        LocalSpieler=spieler(self.eingabe, asciispieler)
+        LocalSpieler=spieler(self.eingabe, asciiart.spieler)
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen!!!!")
         while self.lustvomspieler == 1:
             self.eingabe = input("Willst du die Welt[1]? erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
@@ -263,7 +320,6 @@ class spiel():
                 self.shop(LocalSpieler)
             elif self.eingabe == "666":
                 self.lustvomspieler = 4
-
 
     def shop(self,Spieler):
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Hey Hey.....\n Was begirt deine seele??")
@@ -306,19 +362,13 @@ class spiel():
             else:
                 print("Das gibt es nicht!")
 
-
-
-
-
-
-
-a="xD" # placeholder ascciart
+a="placeholder ascciart"
 
 Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
 Monster2 = monster("Baer", asciiart.bär, 20, 8)
-Monster3 = monster("Drache", a, 30, 20 )
-Monster4 = monster("Kaktus", a, 30, 1)
-Monster5 = monster("Fuchs", a, 10, 5)
+Monster3 = monster("Drache", asciiart.drache, 30, 20 )
+Monster4 = monster("Kaktus", asciiart.kaktus, 30, 1)
+Monster5 = monster("Fuchs", asciiart.fuchs, 10, 5)
 World1 = welt("Wald",1,4,3)
 World2 = welt("Berge",1,2,3)
 World3 =  welt("Fluss", 1,2,3)
@@ -328,4 +378,3 @@ Welten=[World1, World2, World3, World4, World5]
 
 Session1 = spiel()
 Session1.start()
-
