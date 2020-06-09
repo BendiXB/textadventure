@@ -112,7 +112,22 @@ class welt():
         self.gegnerbisloot = gegnerbisloot
 
 
-   # def weltenauswahl(arry):
+    def weltenauswahl(liste, spieler):
+        print("\n\n\n\n\n\n\n\n\n\n")
+        for i in range(len(liste)):
+            print("Welt [", i+1,"] ist:",liste[i].name)
+            print("Die die beute wird mal-",liste[i].lootmult,"-genommen")
+            print("Dafür sind deine Feinde aber ",liste[i].monstermult,"-mal so stark.")
+            print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du den Loot bekommst.\n")
+
+
+        x = int(input("\nin welche Welt willst du gehen?\n"))
+        for i in range(len(liste)):
+            if i == x +1:
+                liste[i].erkunden(spieler)
+
+
+
 
     def erkunden(self, spieler):
         print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
@@ -242,7 +257,8 @@ class spiel():
         while self.lustvomspieler == 1:
             self.eingabe = input("Willst du die Welt[1]? erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
             if self.eingabe == "1":
-              World1.erkunden(LocalSpieler)
+              welt.weltenauswahl(Welten,LocalSpieler)
+              #World1.erkunden(LocalSpieler)
             elif self.eingabe == "2":
                 self.shop(LocalSpieler)
             elif self.eingabe == "666":
@@ -308,7 +324,7 @@ World2 = welt("Berge",1,2,3)
 World3 =  welt("Fluss", 1,2,3)
 World4 = welt("Bergwerk", 1, 2,3)
 World5 = welt("Hölle",10,10,10)
-
+Welten=[World1, World2, World3, World4, World5]
 
 Session1 = spiel()
 Session1.start()
