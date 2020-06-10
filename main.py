@@ -143,7 +143,15 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
 `~--~\ )___,)/'
     (/\\\\_  (/\\\\_
     """
-    seitenumbruch = 25*"\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
+    welt = """
+            _,--',   _._.--._____
+ .--.--';_'-.', ";_      _.,-'
+.'--'.  _.'    {`'-;_ .-.>.'
+      '-:_      )  / `' '=.
+        ) >     {_/,     /~)
+        |/               `^ .'
+    """
+    seitenumbruch = 20*"\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
 
 '''
 Check Klasse
@@ -191,7 +199,8 @@ class welt():
         self.gegnerbisloot = gegnerbisloot
 
     def weltenauswahl(liste, spieler):
-        print("\n\n\n\n\n\n\n\n\n\n")
+        print(asciiart.seitenumbruch)
+        print(asciiart.welt)
         for i in range(len(liste)):
             print("Welt [", i+1,"] ist:",liste[i].name)
             print("Die Beute wird mit ",liste[i].lootmult,"multipliziert")
