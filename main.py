@@ -152,7 +152,7 @@ Funktionen, die humorvoll auf Datentypen prüfen
 class check():
     def blame(inputtocheck):
         print('Ernsthaft??')
-        print(inputtocheck,' Das ist kein ordentliches Input. Lern lesen...')
+        print(inputtocheck,' Das ist keine ordentliche Eingabe. Lern lesen...')
         return False
 
     def string(inputtocheck):
@@ -190,19 +190,19 @@ class welt():
         print("\n\n\n\n\n\n\n\n\n\n")
         for i in range(len(liste)):
             print("Welt [", i+1,"] ist:",liste[i].name)
-            print("Die die beute wird mal-",liste[i].lootmult,"-genommen")
+            print("Die Beute wird mit ",liste[i].lootmult,"multipliziert")
             print("Dafür sind deine Feinde aber ",liste[i].monstermult,"-mal so stark.")
-            print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du den Loot bekommst.\n")
+            print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du die Beute bekommst.\n")
 
         x = int(input("\nin welche Welt willst du gehen?\n"))
-        for i in range(len(liste)):
+        for i in range(len(liste))
             if i == x +1:
                 liste[i].erkunden(spieler)
 
     def erkunden(self, spieler):
         print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
               "Gegner besigen bis du den Loot bekommst.\n dafür bekommst du aber auch die ", self.lootmult,
-              "- menge an Loot.")
+              "fache Menge an Beute.")
         for i in range(self.gegnerbisloot):
             x = randint(1,1)
             if x == 1:
@@ -221,9 +221,9 @@ class welt():
             if i == "2":
                 x = randint(1,3)
                 if x == 1:
-                    print("du kannst wegrennen!! glück gehabt!!")
+                    print("Du kannst wegrennen!! Glück gehabt!!")
                 else:
-                    print("Du du bist zu langsam um zu rennen der gegner holt dich ein")
+                    print("Du du bist zu langsam um zu rennen der gegner holt dich ein.")
                     nextgegner.angreifen(spieler,self.monstermult)
             if i == "1":
                 spieler.angreifen(nextgegner,self.monstermult)
@@ -238,8 +238,8 @@ class wesen():
     def __init__(self, name,  asciiart):
         self.name = name
         self.asciiart = asciiart
-    def angreifen(self, gegner, monstermult):                        # Der angreifer landet den First hit
-        if isinstance(self, spieler):       #Der spieler greift an
+    def angreifen(self, gegner, monstermult):                           # Der angreifer landet den First hit
+        if isinstance(self, spieler):                                   #Der spieler greift an
             gegner.leben=gegner.leben*monstermult
             gegner.schaden=gegner.schaden*monstermult
             while self.leben > 0 and gegner.leben > 0:
@@ -248,15 +248,15 @@ class wesen():
                     self.leben = self.leben - gegner.schaden
                 print(self.leben, "Leben von:", self.name, "    ", gegner.leben, "Leben von:", gegner.name)
             if self.leben <=0:
-                print("du bist gestorben1")
+                print("Du bist gestorben")
                 self.gestorben = True
                 print(self.gestorben)
                 gegner.reset()
             else:
-                print("du hast gewonnen2 ")
+                print("Du hast gewonnen")
                 gegner.reset()
 
-        elif isinstance(self, monster):     #Das monster greift an
+        elif isinstance(self, monster):                                 #Das monster greift an
             self.leben=self.leben*monstermult
             self.schaden=self.schaden*monstermult
             while self.leben > 0 and gegner.leben > 0:
@@ -266,14 +266,14 @@ class wesen():
                 print(self.leben, "Leben von:", self.name, "    ", gegner.leben, "Leben von:", gegner.name)
             print(gegner.name,self.name)
             if self.leben <= 0:
-                print("Du hast gewonnen3")
+                print("Du hast gewonnen")
                 self.reset()
             else:
-                print("Du hast verloren4 ")
+                print("Du hast verloren")
                 gegner.gestorben = True
                 self.reset()
         else:
-            print("fehler angreifen anfang")
+            print("Fehlermeldung! \n Das sollte nicht passieren...")
 
 class spieler(wesen):
     def __init__(self, name, asciiart):
@@ -283,12 +283,12 @@ class spieler(wesen):
         self.schaden = 10
         self.gestorben = False
         super().__init__( name,  asciiart)
-    def sterben(self):                      #nach dem tot bekommt der Spieler eine 2te chance aber ist 20% schwächer
+    def sterben(self):                                  #nach dem Tod bekommt der Spieler eine 2te chance aber ist 20% schwächer
         self.gestorben = False
         self.leben = 20
         self.maxleben = self.maxleben*0.8
         self.schaden = self.schaden*0.8
-        print("\n\n\ndu bist gestorben deine eingeweide werden von einem hobby alchemisten aufgelesen\nund mit einer schnecke gekreuzt. Dadruch lebst du wieder, verlierst aber 20% deiner staerke!!\n\n\n")
+        print("\n\n\n Du bist gestorben. Deine Eingeweide werden von einem Hobbyalchemisten aufgelesen \n und mit einer Schnecke gekreuzt. Dadurch lebst du wieder, verlierst aber 20% deiner Staerke!!\n\n\n")
 
 class monster(wesen):
     def __init__(self, name, asciiart, leben, schaden):
@@ -304,16 +304,16 @@ class monster(wesen):
 class spiel():
     def __init__(self):
         self.lustvomspieler=1
-        self.eingabe ="ka lass dir was einfallen"
+        self.eingabe =""
         self.version = 0.1
         self.credits= ("Bendix und Oscar")
     def start(self):
         print(asciiart.title)
-        self.eingabe= input("Hallo Fremder... \nWie draf ich dich nennen? \n")
+        self.eingabe= input("Hallo Fremder... \nWie darf ich dich nennen? \n")
         LocalSpieler=spieler(self.eingabe, asciiart.spieler)
-        print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen!!!!")
+        print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
         while self.lustvomspieler == 1:
-            self.eingabe = input("Willst du die Welt[1]? erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
+            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
             if self.eingabe == "1":
               welt.weltenauswahl(Welten,LocalSpieler)
               #World1.erkunden(LocalSpieler)
@@ -326,7 +326,7 @@ class spiel():
         print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
         for i in range(200):
             print(asciiart.shop)
-            print("Du hast ", Spieler.geld," Gold!!!")
+            print("Du hast ", Spieler.geld," Gold.")
             self.eingabe = input("\n")            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
 
             if self.eingabe == "1":
@@ -336,23 +336,23 @@ class spiel():
                 else:
                     print(
                         asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begiert deine Seele??")
-                    print("Du hast zu wenig geld")
+                    print("Du hast zu wenig Geld.")
             elif self.eingabe == "2":
                 if check.konto(Spieler, 15) == True:
                     Spieler.geld = Spieler.geld - 15
                     spieler.maxleben = spieler.maxleben + 10
                 else:
                     print(
-                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begirt deine seele??")
-                    print("Du hast zu wenig geld")
+                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begiert deine seele??")
+                    print("Du hast zu wenig Geld.")
             elif self.eingabe == "3":
                 if check.konto(Spieler, 5) == True:
                     Spieler.geld = Spieler.geld - 5
                     spieler.leben = spieler.maxleben
                 else:
                     print(
-                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begirt deine seele??")
-                    print("Du hast zu wenig geld")
+                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begiert deine seele??")
+                    print("Du hast zu wenig Geld.")
            # elif self.eingabe == "4":
                 # etwas
             #elif self.eingabe == "5":
@@ -362,9 +362,7 @@ class spiel():
             elif self.eingabe == "7":
                 break
             else:
-                print("Das gibt es nicht!")
-
-a="placeholder ascciart"
+                print("NEIN")
 
 Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
 Monster2 = monster("Baer", asciiart.bär, 20, 8)
