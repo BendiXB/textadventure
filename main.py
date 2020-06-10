@@ -98,7 +98,7 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
    ////   \\\\ ___//\       
   ///      \\\\      \      
  ///       |\\\\      |     
-//         | \\\\  \   \    1
+//         | \\\\  \   \    
 /          |  \\\\  \   \   
            |   \\\\ /   /   
            |    \/   /    
@@ -143,7 +143,7 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
 `~--~\ )___,)/'
     (/\\\\_  (/\\\\_
     """
-    seitenumbruch = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
+    seitenumbruch = 25*"\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
 
 '''
 Check Klasse
@@ -330,7 +330,7 @@ class spiel():
         print(asciiart.seitenumbruch)
         print(asciiart.tod)
         print('So wie dein Leben ist auch dieses Spiel nun zu ende. \n\n')
-        print('_'*10)
+        print('_'*30)
         print(self.version)
         print(self.credits)
     def start(self):
@@ -338,7 +338,6 @@ class spiel():
         self.eingabe= input("Hallo Fremder... \nWie darf ich dich nennen? \n")
         LocalSpieler=spieler(self.eingabe, asciiart.spieler)
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
-
         while self.lustvomspieler == 1:
             self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
             if self.eingabe == "1":
@@ -350,7 +349,7 @@ class spiel():
                 self.lustvomspieler = 4
 
         # Der Spieler ist tot wenn die Schleife Unterbrochen wurde
-        spiel.ende()
+        self.ende()
 
     def shop(self,Spieler):
         print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
