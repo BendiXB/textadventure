@@ -9,7 +9,7 @@ class asciiart():
     title = """
   ______          __     ___       __                 __                
  /_  __/__  _  __/ /_   /   | ____/ /   _____  ____  / /___  __________ 
-  / / / _ \| |/_/ __/  / /| |/ __  / | / / _ \/ __ \/ __/ / / / ___/ _ |
+  / / / _ \| |/_/ __/  / /| |/ __  / | / / _ \/ __ \/ __/ / / / ___/ _ \\
  / / /  __/>  </ /_   / ___ / /_/ /| |/ /  __/ / / / /_/ /_/ / /  /  __/
 /_/  \___/_/|_|\__/  /_/  |_\__,_/ |___/\___/_/ /_/\__/\__,_/_/   \___/ 
     """
@@ -143,6 +143,7 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
 `~--~\ )___,)/'
     (/\\\\_  (/\\\\_
     """
+    seitenumbruch = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
 '''
 Check Klasse
@@ -322,18 +323,19 @@ class spiel():
                 self.lustvomspieler = 4
 
     def shop(self,Spieler):
-        print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Hey Hey.....\n Was begirt deine seele??")
+        print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
         for i in range(200):
             print(asciiart.shop)
             print("Du hast ", Spieler.geld," Gold!!!")
-            self.eingabe = input("\n")
+            self.eingabe = input("\n")            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
+
             if self.eingabe == "1":
                 if check.konto(Spieler, 10) == True:
                     Spieler.geld = Spieler.geld - 10
                     spieler.schaden = spieler.schaden + 5
                 else:
                     print(
-                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Hey Hey.....\nWas begirt deine seele??")
+                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begiert deine Seele??")
                     print("Du hast zu wenig geld")
             elif self.eingabe == "2":
                 if check.konto(Spieler, 15) == True:
@@ -341,7 +343,7 @@ class spiel():
                     spieler.maxleben = spieler.maxleben + 10
                 else:
                     print(
-                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Hey Hey.....\nWas begirt deine seele??")
+                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begirt deine seele??")
                     print("Du hast zu wenig geld")
             elif self.eingabe == "3":
                 if check.konto(Spieler, 5) == True:
@@ -349,7 +351,7 @@ class spiel():
                     spieler.leben = spieler.maxleben
                 else:
                     print(
-                        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHey Hey Hey.....\nWas begirt deine seele??")
+                        asciiart.seitenumbruch,"Hey Hey Hey.....\nWas begirt deine seele??")
                     print("Du hast zu wenig geld")
            # elif self.eingabe == "4":
                 # etwas
