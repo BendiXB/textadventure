@@ -362,7 +362,7 @@ class spiel():
             elif self.eingabe == "7":
                 break
             else:
-                print("NEIN")
+                print("Das ist leider nicht verfügbar.")
 
 Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
 Monster2 = monster("Baer", asciiart.bär, 20, 8)
