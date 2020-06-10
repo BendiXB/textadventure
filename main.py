@@ -225,8 +225,9 @@ class welt():
 
         x = int(input("\nin welche Welt willst du gehen?\n"))
         for i in range(len(liste)):
-            if i == x +1:
+            if (i+1) == x:
                 liste[i].erkunden(spieler)
+                break
 
     def erkunden(self, spieler):
         print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
