@@ -1,4 +1,7 @@
-from random import *
+"""
+Importe
+"""
+from random import *        # random wird für zufällige Spielinhalte verwendet wie die Gegnerwahl
 
 '''
 Ascii Art Klasse
@@ -69,7 +72,6 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
   |___ /   (|________/   |\_______\       /  /| |______|    [7] Weiter erkunden
       /                  \|________)     /  / | |   
 """
-
     spieler = """
         ___
      __|___|__
@@ -121,7 +123,6 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
                    ,'---\ \              ,---`,;,
                          ```
     """
-
     kaktus = """
            *-*,
        ,*\/|`| \\
@@ -136,7 +137,6 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
        |         |
        |_________|
     """
-
     fuchs = """
               /^._
 ,___,--~~~~--' /'~
@@ -179,6 +179,10 @@ class check():
         else:
             return False
 
+"""
+Die Weltenklasse enthält Attribute die das Spielgeschehen beeinflussen,
+die Wahl der Welten und die Funktion Erkunden() die den Spieler auf Gegner treffen lässt.
+"""
 class welt():
     def __init__(self,name, lootmult, monstermult, gegnerbisloot ):
         self.name = name
@@ -204,7 +208,7 @@ class welt():
               "Gegner besigen bis du den Loot bekommst.\n dafür bekommst du aber auch die ", self.lootmult,
               "fache Menge an Beute.")
         for i in range(self.gegnerbisloot):
-            x = randint(1,1)
+            x = randint(1,5)
             if x == 1:
                 nextgegner = Monster1
             elif x == 2:
@@ -234,6 +238,9 @@ class welt():
         elif spieler.gestorben == True:
             spieler.sterben()
 
+"""
+Die Wesenklasse enthält für Spieler und Monster gleichermaßen verwendete Attribute und die Funktion Angreifen(), die sowol auf Monster als auch Spieler vererbt wird und die Kampfmechanik enthält.
+"""
 class wesen():
     def __init__(self, name,  asciiart):
         self.name = name
@@ -275,6 +282,9 @@ class wesen():
         else:
             print("Fehlermeldung! \n Das sollte nicht passieren...")
 
+"""
+Die Spielerklasse enthält die für Spieler spezifischen Attribute und die funktion sterben() die den Spieler sterben lässt und ihn schwächer wiederbelebt.
+"""
 class spieler(wesen):
     def __init__(self, name, asciiart):
         self.geld = 0
@@ -290,6 +300,9 @@ class spieler(wesen):
         self.schaden = self.schaden*0.8
         print("\n\n\n Du bist gestorben. Deine Eingeweide werden von einem Hobbyalchemisten aufgelesen \n und mit einer Schnecke gekreuzt. Dadurch lebst du wieder, verlierst aber 20% deiner Staerke!!\n\n\n")
 
+"""
+Die Monsterklasse enthält die für Gegner spezifischen Attribute und die Funktion reset() die den Gegner für einen Nächsten Kampf vrbereitet.
+"""
 class monster(wesen):
     def __init__(self, name, asciiart, leben, schaden):
         self.leben = leben
@@ -301,6 +314,9 @@ class monster(wesen):
         self.leben=self.maxleben
         self.schaden=self.maxschaden
 
+"""
+Die Spielklasse enthält den Spielablauf und den Shop.
+"""
 class spiel():
     def __init__(self):
         self.lustvomspieler=1
@@ -364,6 +380,9 @@ class spiel():
             else:
                 print("Das ist leider nicht verfügbar.")
 
+"""
+Definieren der Welten und Monster
+"""
 Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
 Monster2 = monster("Baer", asciiart.bär, 20, 8)
 Monster3 = monster("Drache", asciiart.drache, 30, 20 )
@@ -376,5 +395,8 @@ World4 = welt("Bergwerk", 1, 2,3)
 World5 = welt("Hölle",10,10,10)
 Welten=[World1, World2, World3, World4, World5]
 
+"""
+Starten des Spiels
+"""
 Session1 = spiel()
 Session1.start()
