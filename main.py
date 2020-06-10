@@ -324,13 +324,21 @@ class spiel():
     def __init__(self):
         self.lustvomspieler=1
         self.eingabe =""
-        self.version = 0.1
+        self.version = 1.0
         self.credits= ("Bendix und Oscar")
+    def ende(self):
+        print(asciiart.seitenumbruch)
+        print(asciiart.tod)
+        print('So wie dein Leben ist auch dieses Spiel nun zu ende. \n\n')
+        print('_'*10)
+        print(self.version)
+        print(self.credits)
     def start(self):
         print(asciiart.title)
         self.eingabe= input("Hallo Fremder... \nWie darf ich dich nennen? \n")
         LocalSpieler=spieler(self.eingabe, asciiart.spieler)
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
+
         while self.lustvomspieler == 1:
             self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
             if self.eingabe == "1":
@@ -340,6 +348,9 @@ class spiel():
                 self.shop(LocalSpieler)
             elif self.eingabe == "666":
                 self.lustvomspieler = 4
+
+        # Der Spieler ist tot wenn die Schleife Unterbrochen wurde
+        spiel.ende()
 
     def shop(self,Spieler):
         print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
