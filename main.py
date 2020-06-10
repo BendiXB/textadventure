@@ -151,6 +151,22 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
         ) >     {_/,     /~)
         |/               `^ .'
     """
+    grab = """
+                 _______
+           _____/      \\\\_____
+          |                  ||
+          |  _     ___   _   ||
+          | | \     |   | \  ||
+          | |  |    |   |  | ||
+          | |_/     |   |_/  ||
+          | | \     |   |    ||
+          | |  \    |   |    ||
+          | |   \. _|_. | .  ||
+          |                  ||
+  *       | *   **    * **   |**      **
+   \))ejm96/.,(//,,..,,\||(,,.,\\,.((//
+
+    """
     seitenumbruch = 20*"\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
 
 '''
@@ -309,6 +325,8 @@ class spieler(wesen):
         self.leben = 20
         self.maxleben = self.maxleben*0.8
         self.schaden = self.schaden*0.8
+        print(asciiart.seitenumbruch)
+        print(asciiart.grab)
         print("\n\n\n Du bist gestorben. Deine Eingeweide werden von einem Hobbyalchemisten aufgelesen \n und mit einer Schnecke gekreuzt. Dadurch lebst du wieder, verlierst aber 20% deiner Staerke!!\n\n\n")
 
 """
