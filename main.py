@@ -6,7 +6,7 @@ from random import *        # random wird für zufällige Spielinhalte verwendet
 '''
 Ascii Art Klasse
 Enthält Ascii Artwork strukturiert als Variablen zur verwendung in allen Teilen des Programmes
-Verwendeung bsp asciiart.bär
+Verwendeung bsp asciiart.baer
 '''
 class asciiart():
     title = """
@@ -33,7 +33,7 @@ class asciiart():
      || ||             '-'
      '-''-'
     """
-    bär = '''
+    baer = '''
   _      _                        
  : `.--.' ;              _....,_  
  .'      `.      _..--'"'       `-._
@@ -143,7 +143,7 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
 `~--~\ )___,)/'
     (/\\\\_  (/\\\\_
     """
-    seitenumbruch = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    seitenumbruch = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
 
 '''
 Check Klasse
@@ -239,7 +239,8 @@ class welt():
             spieler.sterben()
 
 """
-Die Wesenklasse enthält für Spieler und Monster gleichermaßen verwendete Attribute und die Funktion Angreifen(), die sowol auf Monster als auch Spieler vererbt wird und die Kampfmechanik enthält.
+Die Wesenklasse enthält für Spieler und Monster gleichermaßen verwendete Attribute 
+und die Funktion Angreifen(), die sowol auf Monster als auch Spieler vererbt wird und die Kampfmechanik enthält.
 """
 class wesen():
     def __init__(self, name,  asciiart):
@@ -283,7 +284,8 @@ class wesen():
             print("Fehlermeldung! \n Das sollte nicht passieren...")
 
 """
-Die Spielerklasse enthält die für Spieler spezifischen Attribute und die funktion sterben() die den Spieler sterben lässt und ihn schwächer wiederbelebt.
+Die Spielerklasse enthält die für Spieler spezifischen Attribute u
+nd die funktion sterben() die den Spieler sterben lässt und ihn schwächer wiederbelebt.
 """
 class spieler(wesen):
     def __init__(self, name, asciiart):
@@ -301,7 +303,8 @@ class spieler(wesen):
         print("\n\n\n Du bist gestorben. Deine Eingeweide werden von einem Hobbyalchemisten aufgelesen \n und mit einer Schnecke gekreuzt. Dadurch lebst du wieder, verlierst aber 20% deiner Staerke!!\n\n\n")
 
 """
-Die Monsterklasse enthält die für Gegner spezifischen Attribute und die Funktion reset() die den Gegner für einen Nächsten Kampf vrbereitet.
+Die Monsterklasse enthält die für Gegner spezifischen Attribute 
+und die Funktion reset() die den Gegner für einen Nächsten Kampf vrbereitet.
 """
 class monster(wesen):
     def __init__(self, name, asciiart, leben, schaden):
@@ -384,7 +387,7 @@ class spiel():
 Definieren der Welten und Monster
 """
 Monster1 = monster("Wolf", asciiart.wolf, 15, 10)
-Monster2 = monster("Baer", asciiart.bär, 20, 8)
+Monster2 = monster("Baer", asciiart.baer, 20, 8)
 Monster3 = monster("Drache", asciiart.drache, 30, 20 )
 Monster4 = monster("Kaktus", asciiart.kaktus, 30, 1)
 Monster5 = monster("Fuchs", asciiart.fuchs, 10, 5)
