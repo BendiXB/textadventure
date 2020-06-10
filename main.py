@@ -199,7 +199,7 @@ class welt():
             print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du die Beute bekommst.\n")
 
         x = int(input("\nin welche Welt willst du gehen?\n"))
-        for i in range(len(liste))
+        for i in range(len(liste)):
             if i == x +1:
                 liste[i].erkunden(spieler)
 
@@ -346,8 +346,8 @@ class spiel():
         for i in range(200):
             print(asciiart.shop)
             print("Du hast ", Spieler.geld," Gold.")
-            self.eingabe = input("\n")            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
-
+            self.eingabe = input("\n")
+            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
             if self.eingabe == "1":
                 if check.konto(Spieler, 10) == True:
                     Spieler.geld = Spieler.geld - 10
