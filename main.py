@@ -167,35 +167,41 @@ __|  \/\|/   /(____|/ //                    /  /||~|~|~|__  [6] Eine Blutspende 
    \))ejm96/.,(//,,..,,\||(,,.,\\,.((//
 
     """
-    seitenumbruch = 20*"\n" #Seitenumbruch klärt das Terminalfenster wenn geprintet
+    seitenumbruch = 20*"\n"     #Seitenumbruch klärt das Terminalfenster wenn geprintet
 
 '''
 Check Klasse
-Funktionen, die humorvoll auf Datentypen prüfen
+Funktionen, die humorvoll Eingaben prüfen
 '''
 class check():
+    # blame wird aufgerufen wenn eine Prüfung negativ ist um den Nutzer zu flamen
     def blame(inputtocheck):
         print('Ernsthaft??')
-        print(inputtocheck,' Das ist keine ordentliche Eingabe. Lern lesen...')
-        return False
+        print(inputtocheck,'\n','Das ist keine ordentliche Eingabe. Lern lesen...')
 
-    def string(inputtocheck):
-        if isinstance(inputtocheck, str):
-            return True
+    # check.string prüft auf einen String
+    def string(inputtocheck):               # inputtocheck ist die Variable die auf einen Typ geprüft wird
+        if isinstance(inputtocheck, str):   # isinstance gibt Wahr zurück wenn ein String
+            return True                     # Ausgabe der Funktion ist wahr wenn ein String
         else:
-            check.blame(inputtocheck)
+            check.blame(inputtocheck)       # Den Spieler flamen wenn Eingabe falsch
+            return False                    # Ausgabe der Funktion is Falsch wenn kein String
 
-    def intenger(inputtocheck):
-        if isinstance(inputtocheck, int):
-            return True
+    # check.intenger prüft auf einen Intenger
+    def intenger(inputtocheck):             # inputtocheck ist die Variable die auf einen Typ geprüft wird
+        if isinstance(inputtocheck, int):   # isinstance gibt Wahr zurück wenn ein Intenger
+            return True                     # Ausgabe der Funktion ist wahr wenn ein Intenger
         else:
-            check.blame(inputtocheck)
+            check.blame(inputtocheck)       # Den Spieler flamen wenn Eingabe falsch
+            return False                    # Ausgabe der Funktion ist wahr wenn kein Intenger
 
-    def inlist(inputtocheck, list):
-        if inputtocheck in str(list):
-            return True
+    # check.inlist prüft ob eine Eingabe in einer Liste aus Intengern enthalten ist
+    def inlist(inputtocheck, list):         # An die Funktion wird eine Liste von Intengern und die zu prüfende Eingabe übergeben
+        if inputtocheck in str(list):       # Wenn die Eingabe in der Liste von Möglichkeiten ist
+            return True                     # Ausgabe der Funktion ist wahr wenn die Eingabe in der Liste ist
         else:
-            check.blame(inputtocheck)
+            check.blame(inputtocheck)       # Gegner flamen wenn Eingabe nicht in Liste
+            return False                    # Ausgabe der Funktion ist Falsch wenn die Eingabe in der Liste ist
 
     def konto(Spieler, geld):
         if Spieler.geld >= geld:
