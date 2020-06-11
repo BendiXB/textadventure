@@ -429,11 +429,11 @@ Monster2 = monster("Baer", asciiart.baer, 20, 8)
 Monster3 = monster("Drache", asciiart.drache, 30, 20 )
 Monster4 = monster("Kaktus", asciiart.kaktus, 30, 1)
 Monster5 = monster("Fuchs", asciiart.fuchs, 10, 5)
-World1 = welt("Wald",1,4,3)
-World2 = welt("Berge",1,2,3)
+World1 = welt("Wald",1,0.5,3)
+World2 = welt("Berge",1,1,3)
 World3 =  welt("Fluss", 1,2,3)
-World4 = welt("Bergwerk", 1, 2,3)
-World5 = welt("Hölle",10,10,10)
+World4 = welt("Bergwerk", 1, 3,3)
+World5 = welt("Hölle",10,4,10)
 Welten=[World1, World2, World3, World4, World5]
 
 """
