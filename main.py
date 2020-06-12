@@ -203,14 +203,17 @@ class check():
             check.blame(inputtocheck)       # Gegner flamen wenn Eingabe nicht in Liste
             return False                    # Ausgabe der Funktion ist Falsch wenn die Eingabe in der Liste ist
 
-    def konto(Spieler, geld):
-        if Spieler.geld >= geld:
-            return True
+    # check.konto prüft ob auf dem Konto eines Spielerobjektes ein übergebener Betrag liegt
+    def konto(Spieler, geld):               # An die Funktion wird ein Spielerobjekt und ein Geldbetrag übergeben
+        if Spieler.geld >= geld:            # Wenn der Spieler den Geltbetrag besitzt
+            return True                     # Ausgabe der Funktion ist wahr wenn der Spieler genug Geld hat
         else:
-            return False
+            return False                    # Ausgabe der Funktion ist falsch wenn der Spieler zu wenig Geld hat
+
+    # check.keingeld sagt dem Spieler er hat nicht genug Geld
     def keingeld():
-        print(asciiart.seitenumbruch + "Hey Hey Hey.....\nWas begiert deine seele??")
-        print("!!!!!!!!Du hast zu wenig Geld.!!!!!!!!!")
+        print("\n !!!!!!!!Du hast zu wenig Geld.!!!!!!!!!")
+        print("\n\nWas möchtest du stattdessen haben?")
 
 
 """
@@ -241,7 +244,7 @@ class welt():
             # Ausgabe der aller Welt Atribute
 
         x = int(input("\nin welche Welt willst du gehen?\n")) #Speicherung des Spielerinputs in x als int für die Weltauswahl
-        check.inlist(x,[1,2,3,4,5])
+        check.inlist(x,[1,2,3,4,5])             #Eingabe prüfen
         for i in range(len(liste)):             #Schleife um den Spielerinput auszuwerten
             if (i+1) == x:                      #siehe doc-string
                 liste[i].erkunden(spieler)      #starten der erkundenmethode der ausgewählten Welt
@@ -263,7 +266,7 @@ class welt():
         for i in range(self.gegnerbisloot):             #schleife für gegnerauswahl und zeuteilung eines random gegners
             x = randint(1,5)                            # random int für den Zufälligen gegner
             if x == 1:
-                nextgegner = Monster1                   #next gegner wird ein Monster zugeteilt
+                nextgegner = Monster1                   #next gegner wird ein Monster zugeteilt todo optimieren
             elif x == 2:
                 nextgegner = Monster2
             elif x == 3:
@@ -395,25 +398,35 @@ class spiel():
     def __init__(self):
         self.lustvomspieler=1                           #Variable für die hauptschleife
         self.eingabe =""                                #Variable für die eingabe
-        self.version = 1.0
-        self.credits= ("Bendix und Oscar")
+        self.version = 1.0                              # Version für credits
+        self.credits= ("Bendix und Oscar")              # Weitere creditzeile die Autoren enthält
+    # Funktion wird aufgerufen wenn wenn das Spiel edgültig zu ende ist
     def ende(self):
-        print(asciiart.seitenumbruch)
+        print(asciiart.seitenumbruch)                   # Gibt den Endbildschirm aus
         print(asciiart.tod)
         print('So wie dein Leben ist auch dieses Spiel nun zu ende. \n\n')
         print('_'*30)
         print(self.version)
         print(self.credits)
-    def start(self):                                    #Startet das Spiel
+    """
+    Diese Funktion enthält die Hauptschleife die den Spieler durch die Welt leitet
+    Sie wird zum starten des Spieles gestartet
+    """
+    def start(self):
         print(asciiart.title)
         self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen?\n")      #eingabe des spielernamens
-        while not check.string(self.eingabe):
+        while not check.string(self.eingabe):                                                          # Eingabe sicherhalthalber prüfen
             self.eingabe = input()
-        LocalSpieler=spieler(self.eingabe, asciiart.spieler)                                            #der Spieler Wird erstellt
+        LocalSpieler=spieler(self.eingabe, asciiart.spieler)       #der Spieler Wird erstellt
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
-        while self.lustvomspieler == 1:                                                                 #hauptschleife des Spiels
-            self.eingabe = input("\nWillst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
-            while not check.inlist(self.eingabe,[1,2,666]):
+
+        """
+        Hauptschleife des Spiels
+        Ist sie unterbrochn ist der Spieler endgültig gestorben
+        """
+        while self.lustvomspieler == 1:
+            self.eingabe = input("\nWillst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n") # Auswahl zwischen Welt und Shop
+            while not check.inlist(self.eingabe,[1,2,666]): # Eingabe prüfen
                 self.eingabe = input()
             if self.eingabe == "1":
               welt.weltenauswahl(Welten,LocalSpieler)       #Die weltenauswahl wird gfestartet mit der Liste aller welten und dem Spielernamen
@@ -436,37 +449,37 @@ class spiel():
             self.eingabe = input()
             while not check.inlist(self.eingabe, [1,2,3,4,5,6,7]):
                 self.eingabe = input()
-            if self.eingabe == "1":                             #Auswahl des spielers finden
-                if check.konto(Spieler, 10) == True:            #Konto des Spilers checken
+            if self.eingabe == "1": #Schwert                     #Auswahl des spielers finden
+                if check.konto(Spieler, 10) == True:            #Konto des Spielers checken
                     Spieler.geld = Spieler.geld - 10            #Geld abziehen
-                    spieler.schaden = spieler.schaden + 5       #efekt des kaufs
+                    spieler.schaden = spieler.schaden + 5       #Efekt des kaufs
                 else:                                           #sonst
                     check.keingeld()                            #Aufrufen von Kein geld
-            elif self.eingabe == "2":
+            elif self.eingabe == "2":  # Panzer
                 if check.konto(Spieler, 15) == True:
                     Spieler.geld = Spieler.geld - 15
                     spieler.maxleben = spieler.maxleben + 10
                 else:
                     check.keingeld()
-            elif self.eingabe == "3":
+            elif self.eingabe == "3":  # Suppe
                 if check.konto(Spieler, 5) == True:
                     Spieler.geld = Spieler.geld - 5
                     Spieler.leben = Spieler.maxleben
                 else:
                     check.keingeld()
-            elif self.eingabe == "4":
+            elif self.eingabe == "4":  # 5G Mist
                 if check.konto(Spieler, 666) == True:
                     Spieler.geld = Spieler.geld - 666
                     print("**** Herzlichen Glückwunsch du bist jetzt der stolze besitzer eines 5G-Schildes. \nDie Echsenmenschen werden dir nun nichts mehr anhaben können ****")
                 else:
                     check.keingeld()
-            elif self.eingabe == "5":
+            elif self.eingabe == "5":  # Gucci Schild
                 if check.konto(Spieler, 90) == True:
                     Spieler.geld = Spieler.geld - 90
                     Spieler.maxleben = Spieler.maxleben + 90
                 else:
                     check.keingeld()
-            elif self.eingabe == "6":
+            elif self.eingabe == "6":  # Blut spenden
                 print("Dake das du dein Blut bereitstellst")
                 Spieler.leben=Spieler.leben - 1
                 Spieler.geld=Spieler.geld+2
@@ -478,7 +491,7 @@ class spiel():
                     print("Du hast zuviel gespendet! DU HAST JETZT KEIN BLUT MEHR!!!!")
                     Spieler.sterben()
                     break
-            elif self.eingabe == "7":
+            elif self.eingabe == "7":  # genug Kapitalismus für heute
                 break
 
 """
