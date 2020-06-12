@@ -218,35 +218,52 @@ Die Weltenklasse enthält Attribute die das Spielgeschehen beeinflussen,
 die Wahl der Welten und die Funktion Erkunden() die den Spieler auf Gegner treffen lässt.
 """
 class welt():
-    def __init__(self,name, lootmult, monstermult, gegnerbisloot ):
-        self.name = name
-        self.lootmult = lootmult
-        self.monstermult = monstermult
-        self.gegnerbisloot = gegnerbisloot
+    def __init__(self,name, lootmult, monstermult, gegnerbisloot ):         #Konstruktor einer Welt
+        self.name = name                        #Name der Welt
+        self.lootmult = lootmult                #Beute Multiplikator
+        self.monstermult = monstermult          #Multiplikator für den Schaden und das Leben der Gegener
+        self.gegnerbisloot = gegnerbisloot      #Die Anzahl der gegner die man bekämpfen muss bis man den Loot bekommt
 
+
+    """ 
+    Weltenauswahl ist eine Methode der Klasse Welt. Sie wird von Spiel aufgerufen
+    und ist zuständig für die Auswahl der Welt.
+    Ihr wird eine Liste der aktuellen Welten und der der Name des aktuellen Spielers.
+    """
     def weltenauswahl(liste, spieler):
         print(asciiart.seitenumbruch)
-        print(asciiart.welt)
-        for i in range(len(liste)):
+        print(asciiart.welt)                    #asciiart der Welt
+        for i in range(len(liste)):             #schleife zu auflisten aller in der Liste gespeicherten Welten
             print("Welt [", i+1,"] ist:",liste[i].name)
             print("Die Beute wird mit ",liste[i].lootmult,"multipliziert")
             print("Dafür sind deine Feinde aber ",liste[i].monstermult,"-mal so stark.")
             print("Und du musst ",liste[i].gegnerbisloot,"-gegner Töten bis du die Beute bekommst.\n")
+            # Ausgabe der aller Welt Atribute
 
-        x = int(input("\nin welche Welt willst du gehen?\n"))
-        for i in range(len(liste)):
-            if (i+1) == x:
-                liste[i].erkunden(spieler)
+        x = int(input("\nin welche Welt willst du gehen?\n")) #Speicherung des Spielerinputs in x als int für die Weltauswahl
+        #todo input überprüfen
+        for i in range(len(liste)):             #Schleife um den Spielerinput auszuwerten
+            if (i+1) == x:                      #siehe doc-string
+                liste[i].erkunden(spieler)      #starten der erkundenmethode der ausgewählten Welt
                 break
+            """
+            Wenn i geht von 0 bis zu der Anzahl der Elemente (Welten) in der Liste. 
+            Die Spielereigabe x geht von 1 bis zu der Anzahl der Elemente in der Liste + 1 
+            weil die Eingabe erst bei 1 anfängt und nicht bei 0
+            """
 
+
+    """
+    erkunden ist eine Methode von Welt. Sie bekommt den Spielernamen übergeben und Startet die keämpfe mit gegnern.
+    """
     def erkunden(self, spieler):
         print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
               "Gegner besigen bis du den Loot bekommst.\n dafür bekommst du aber auch die ", self.lootmult,
-              "fache Menge an Beute.")
-        for i in range(self.gegnerbisloot):
-            x = randint(1,5)
+              "fache Menge an Beute.")                  #printet allgemeine infos für den spieler
+        for i in range(self.gegnerbisloot):             #schleife für gegnerauswahl und zeuteilung eines random gegners
+            x = randint(1,5)                            # random int für den Zufälligen gegner
             if x == 1:
-                nextgegner = Monster1
+                nextgegner = Monster1                   #next gegner wird ein Monster zugeteilt
             elif x == 2:
                 nextgegner = Monster2
             elif x == 3:
@@ -256,23 +273,32 @@ class welt():
             elif x == 5:
                 nextgegner = Monster5
 
+
+            """
+            gibt den Nächsten gegner aus und fragt ist für die wegrennen mechanik verantwortlich.
+            Man hat eine 33% chance Wegzurennen. Wenn man es versucht und nicht schafft hat der gegner
+            den ersten Schlag und nicht der spieler.
+            Wenn ein kampf statfindet wir die die Methode anrgreifen von denjenigem ausgefürht
+            der den ersten Schlag landet. 
+            Dabei wird das "opfer" und und der gegnermult übergeben.
+            """
             print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
-            i = input()
+            i = input()             #Todo input überprüfen
             if i == "2":
-                x = randint(1,3)
-                if x == 1:
+                x = randint(2,3)    #x ist ein random int von 1 bis 3
+                if x == 1:          #33% chance das man es schafft
                     print("Du kannst wegrennen!! Glück gehabt!!")
-                else:
+                else:               #nicht geschafft
                     print("Du du bist zu langsam um zu rennen der gegner holt dich ein.")
-                    nextgegner.angreifen(spieler,self.monstermult)
-            if i == "1":
-                spieler.angreifen(nextgegner,self.monstermult)
-            if spieler.gestorben == True:
+                    nextgegner.angreifen(spieler,self.monstermult)      #Nicht geschafft der gegner hat den ersten schlag
+            if i == "1":            #Spieler rennt nicht weg
+                spieler.angreifen(nextgegner,self.monstermult)          #Spieler greift an und hat ersten schlag
+            if spieler.gestorben == True:                               #falls spieler in der welt stirbt wird die Welt abgebrochen
                 break
         if spieler.gestorben == False:
-            spieler.geld = spieler.geld + (10*self.lootmult)
+            spieler.geld = spieler.geld + (10*self.lootmult)            #Loot an spieler ausschenken
         elif spieler.gestorben == True:
-            spieler.sterben()
+            spieler.sterben()                                           #spieler gestorben und aufrufen von spieler.sterben()
 
 """
 Die Wesenklasse enthält für Spieler und Monster gleichermaßen verwendete Attribute 
@@ -282,24 +308,29 @@ class wesen():
     def __init__(self, name,  asciiart):
         self.name = name
         self.asciiart = asciiart
+    """
+    Angreifen ist eine methode der Klasse Wesen welche den kampf zwischen zwei wesen abhandelt.
+    Das wesen was angreifen ausführt ist immer derjenige der den ersten Schlag landet. Mit der Methode werden 
+    der anzugreifende (gegner) und der monstermultiplikator. 
+    """
     def angreifen(self, gegner, monstermult):                           # Der angreifer landet den First hit
-        if isinstance(self, spieler):                                   #Der spieler greift an
-            gegner.leben=gegner.leben*monstermult
+        if isinstance(self, spieler):                                   # Überprüfen wer angreift hier der Spieler
+            gegner.leben=gegner.leben*monstermult                       # anwenden des Monstermult.
             gegner.schaden=gegner.schaden*monstermult
-            while self.leben > 0 and gegner.leben > 0:
-                gegner.leben = gegner.leben - self.schaden
-                if self.leben > 0 and gegner.leben > 0:
-                    self.leben = self.leben - gegner.schaden
+            while self.leben > 0 and gegner.leben > 0:                  # abwicklung des Kampfes
+                gegner.leben = gegner.leben - self.schaden              # der erste schlag
+                if self.leben > 0 and gegner.leben > 0:                 # überprüfen ob der gegner schon nach einem schlag tod ist
+                    self.leben = self.leben - gegner.schaden            # sonst schlag von gegner
                 print(self.leben, "Leben von:", self.name, "    ", gegner.leben, "Leben von:", gegner.name)
-            if self.leben <=0:
+            if self.leben <=0:                                          # Überprüfe wer gestorben ist
                 print("Du bist gestorben")
-                self.gestorben = True
+                self.gestorben = True                                   # Spieler ist gestorben
                 print(self.gestorben)
-                gegner.reset()
+                gegner.reset()            # Gegner schaden und leben aus standert zurücksetzen mit der methode gegner.reset()
             else:
                 print("Du hast gewonnen")
                 gegner.reset()
-
+        #Das gleiche wie oben nur das self das monster ist und gegner der spieler
         elif isinstance(self, monster):                                 #Das monster greift an
             self.leben=self.leben*monstermult
             self.schaden=self.schaden*monstermult
@@ -317,24 +348,24 @@ class wesen():
                 gegner.gestorben = True
                 self.reset()
         else:
-            print("Fehlermeldung! \n Das sollte nicht passieren...")
+            print("Fehlermeldung! \n Das sollte nicht passieren...") # Allgemeine fehlermeldung
 
 """
 Die Spielerklasse enthält die für Spieler spezifischen Attribute u
 nd die funktion sterben() die den Spieler sterben lässt und ihn schwächer wiederbelebt.
 """
 class spieler(wesen):
-    def __init__(self, name, asciiart):
+    def __init__(self, name, asciiart):                #Erbt name und asciiart von Wesen
         self.geld = 0
         self.leben = 20
         self.maxleben = 20
         self.schaden = 10
         self.gestorben = False
-        super().__init__( name,  asciiart)
+        super().__init__( name,  asciiart)              #Erbt das von Wesen
     def sterben(self):                                  #nach dem Tod bekommt der Spieler eine 2te chance aber ist 20% schwächer
-        self.gestorben = False
+        self.gestorben = False                          # zurücksezten der Variable auf False
         self.leben = 20
-        self.maxleben = self.maxleben*0.8
+        self.maxleben = self.maxleben*0.8               #Maxleb und Maxschaden um 20% schwächer machen
         self.schaden = self.schaden*0.8
         print(asciiart.seitenumbruch)
         print(asciiart.grab)
@@ -345,13 +376,13 @@ Die Monsterklasse enthält die für Gegner spezifischen Attribute
 und die Funktion reset() die den Gegner für einen Nächsten Kampf vrbereitet.
 """
 class monster(wesen):
-    def __init__(self, name, asciiart, leben, schaden):
+    def __init__(self, name, asciiart, leben, schaden):#Konstruktor für ein Monster
         self.leben = leben
-        self.maxleben = leben
+        self.maxleben = leben                           #Standert leben zum zurücksetzen der monster nach einem kampf
         self.schaden = schaden
-        self.maxschaden=schaden
-        super().__init__(name,asciiart)
-    def reset(self):
+        self.maxschaden=schaden                         #So wie maxleben
+        super().__init__(name,asciiart)                 #erbt name und asciiart von Wesen
+    def reset(self):                                    #zurücksetzen des monsteres auf standart werte nach Kampf
         self.leben=self.maxleben
         self.schaden=self.maxschaden
 
@@ -360,8 +391,8 @@ Die Spielklasse enthält den Spielablauf und den Shop.
 """
 class spiel():
     def __init__(self):
-        self.lustvomspieler=1
-        self.eingabe =""
+        self.lustvomspieler=1                           #Variable für die hauptschleife
+        self.eingabe =""                                #Variable für die eingabe
         self.version = 1.0
         self.credits= ("Bendix und Oscar")
     def ende(self):
@@ -371,36 +402,38 @@ class spiel():
         print('_'*30)
         print(self.version)
         print(self.credits)
-    def start(self):
+    def start(self):                                    #Startet das Spiel
         print(asciiart.title)
-        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen? \n")
-        LocalSpieler=spieler(self.eingabe, asciiart.spieler)
+        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen? \n")       #eingabe des spielernamens
+        LocalSpieler=spieler(self.eingabe, asciiart.spieler)                                            #der Spieler Wird erstellt
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
-        while self.lustvomspieler == 1:
-            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
+        while self.lustvomspieler == 1:                                                                 #hauptschleife des Spiels
+            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n") #todo input überprüfen
             if self.eingabe == "1":
-              welt.weltenauswahl(Welten,LocalSpieler)
-              #World1.erkunden(LocalSpieler)
+              welt.weltenauswahl(Welten,LocalSpieler)       #Die weltenauswahl wird gfestartet mit der Liste aller welten und dem Spielernamen
             elif self.eingabe == "2":
-                self.shop(LocalSpieler)
+                self.shop(LocalSpieler)                     #der Shop wird geöffnet und der Spilername wird übergeben
             elif self.eingabe == "666":
-                self.lustvomspieler = 4
+                self.lustvomspieler = 666                   #der Spiler hat keine Lust mehr und die bedinung der Hauptschleife wird verändert
 
         # Der Spieler ist tot wenn die Schleife Unterbrochen wurde
         self.ende()
-
+    """
+    Der Shop ist eine Methode der Klasse Spiel. Bei der Ausführung muss der name des Spielers übergben werden.
+    Der Shop ist ein Shop indem der Spiener dinge kaufen kann.
+    """
     def shop(self,Spieler):
         print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
-        for i in range(200):
-            print(asciiart.shop)
+        for i in range(200):        #Eine Schleife für den Shop (nach 200 einkäufen am stück muss dann auch schluss sein
+            print(asciiart.shop)    #Darstellung der asciiart mit gegenständen und preisen
             print("Du hast ", Spieler.geld," Gold.")
             self.eingabe = input("\n")
-            if self.eingabe == "1":
-                if check.konto(Spieler, 10) == True:
-                    Spieler.geld = Spieler.geld - 10
-                    spieler.schaden = spieler.schaden + 5
-                else:
-                    check.keingeld()
+            if self.eingabe == "1":                             #Auswahl des spielers finden
+                if check.konto(Spieler, 10) == True:            #Konto des Spilers checken
+                    Spieler.geld = Spieler.geld - 10            #Geld abziehen
+                    spieler.schaden = spieler.schaden + 5       #efekt des kaufs
+                else:                                           #sonst
+                    check.keingeld()                            #Aufrufen von Kein geld
             elif self.eingabe == "2":
                 if check.konto(Spieler, 15) == True:
                     Spieler.geld = Spieler.geld - 15
