@@ -49,13 +49,13 @@ class asciiart():
     `.......'              `........-'`
     '''
     shop="""    
-  _____________________        __   __  _  __    _ ____
+  ______________________________________________________
   ||=|=|=|=|=|=|=|=|=|=|=| __..\/ |  |_|  ||#||==|  / /|    
-  || | | | | | | | | | | |/\ \  \\|++|=|  || ||==| / / |
+  || | | | | | | | | | | |/\ \  \\\\|++|=|  || ||==| / / |
   ||_|_|_|_|_|_|_|_|_|_|_/_/\_.___\__|_|__||_||__|/_/__|
   |____________________ /\~()/()~//\ __________________|    [1] Ein Schwert für den Preis von 10 Gold
   | __   __    _  _     \_  (_ .  _/ _    ___     _____|
-  ||~~|_|..|__| || |_ _   \ //\\ /  |=|__|~|~|___| | | |    [2] Einenen Panzer für die zarte Brust des
+  ||~~|_|..|__| || |_ _   \ //\\\\ /  |=|__|~|~|___| | | |    [2] Einenen Panzer für die zarte Brust des
   ||--|+|^^|==|1||2| | |__/\ __ /\__| |==|x|x|+|+|=|=|=|     Kriegers für den Preis von 15 Gold
   ||__|_|__|__|_||_|_| /  \ \  / /  \_|__|_|_|_|_|_|_|_|
   |_________________ _/    \/\/\/    \_ _______________|    [3] Eine Pilzsuppe die einen wieder auf die
@@ -177,7 +177,7 @@ class check():
     # blame wird aufgerufen wenn eine Prüfung negativ ist um den Nutzer zu flamen
     def blame(inputtocheck):
         print('Ernsthaft??')
-        print(inputtocheck,'\n','Das ist keine ordentliche Eingabe. Lern lesen...')
+        print(inputtocheck,'ist keine ordentliche Eingabe. Lern lesen...')
 
     # check.string prüft auf einen String
     def string(inputtocheck):               # inputtocheck ist die Variable die auf einen Typ geprüft wird
@@ -209,7 +209,7 @@ class check():
         else:
             return False
     def keingeld():
-        print(asciiart.seitenumbruch, "Hey Hey Hey.....\nWas begiert deine seele??")
+        print(asciiart.seitenumbruch + "Hey Hey Hey.....\nWas begiert deine seele??")
         print("!!!!!!!!Du hast zu wenig Geld.!!!!!!!!!")
 
 
@@ -257,8 +257,8 @@ class welt():
     erkunden ist eine Methode von Welt. Sie bekommt den Spielernamen übergeben und Startet die keämpfe mit gegnern.
     """
     def erkunden(self, spieler):
-        print("Du bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
-              "Gegner besigen bis du den Loot bekommst.\n dafür bekommst du aber auch die ", self.lootmult,
+        print("\nDu bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
+              "Gegner besigen bis du den Loot bekommst.\ndafür bekommst du aber auch die ", self.lootmult,
               "fache Menge an Beute.")                  #printet allgemeine infos für den spieler
         for i in range(self.gegnerbisloot):             #schleife für gegnerauswahl und zeuteilung eines random gegners
             x = randint(1,5)                            # random int für den Zufälligen gegner
@@ -282,7 +282,7 @@ class welt():
             der den ersten Schlag landet. 
             Dabei wird das "opfer" und und der gegnermult übergeben.
             """
-            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1] ?")
+            print("\nDu triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1] ?")
             i = input()
             while not check.inlist(i,[1,2]):
                 i = input()
@@ -291,7 +291,7 @@ class welt():
                 if x == 1:          #33% chance das man es schafft
                     print("Du kannst wegrennen!! Glück gehabt!!")
                 else:               #nicht geschafft
-                    print("Du du bist zu langsam um zu rennen der gegner holt dich ein.")
+                    print("Du du bist zu langsam um zu rennen der gegner holt dich ein und du musst kämpfen aber der Gegner greift zuerst an..")
                     nextgegner.angreifen(spieler,self.monstermult)      #Nicht geschafft der gegner hat den ersten schlag
             if i == "1":            #Spieler rennt nicht weg
                 spieler.angreifen(nextgegner,self.monstermult)          #Spieler greift an und hat ersten schlag
@@ -406,13 +406,13 @@ class spiel():
         print(self.credits)
     def start(self):                                    #Startet das Spiel
         print(asciiart.title)
-        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen? \n")      #eingabe des spielernamens
+        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen?\n")      #eingabe des spielernamens
         while not check.string(self.eingabe):
             self.eingabe = input()
         LocalSpieler=spieler(self.eingabe, asciiart.spieler)                                            #der Spieler Wird erstellt
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
         while self.lustvomspieler == 1:                                                                 #hauptschleife des Spiels
-            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
+            self.eingabe = input("\nWillst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
             while not check.inlist(self.eingabe,[1,2,666]):
                 self.eingabe = input()
             if self.eingabe == "1":
