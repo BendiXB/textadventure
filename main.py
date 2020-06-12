@@ -1,7 +1,7 @@
 """
 Importe
 """
-from random import *        # random wird für zufällige Spielinhalte verwendet wie die Gegnerwahl
+from random import *            # random wird für zufällige Spielinhalte verwendet wie die Gegnerwahl
 
 '''
 Ascii Art Klasse
@@ -197,7 +197,7 @@ class check():
 
     # check.inlist prüft ob eine Eingabe in einer Liste aus Intengern enthalten ist
     def inlist(inputtocheck, list):         # An die Funktion wird eine Liste von Intengern und die zu prüfende Eingabe übergeben
-        if inputtocheck in str(list):       # Wenn die Eingabe in der Liste von Möglichkeiten ist
+        if str(inputtocheck) in str(list):  # Wenn die Eingabe in der Liste von Möglichkeiten ist
             return True                     # Ausgabe der Funktion ist wahr wenn die Eingabe in der Liste ist
         else:
             check.blame(inputtocheck)       # Gegner flamen wenn Eingabe nicht in Liste
@@ -241,7 +241,7 @@ class welt():
             # Ausgabe der aller Welt Atribute
 
         x = int(input("\nin welche Welt willst du gehen?\n")) #Speicherung des Spielerinputs in x als int für die Weltauswahl
-        #todo input überprüfen
+        check.inlist(x,[1,2,3,4,5])
         for i in range(len(liste)):             #Schleife um den Spielerinput auszuwerten
             if (i+1) == x:                      #siehe doc-string
                 liste[i].erkunden(spieler)      #starten der erkundenmethode der ausgewählten Welt
@@ -282,8 +282,10 @@ class welt():
             der den ersten Schlag landet. 
             Dabei wird das "opfer" und und der gegnermult übergeben.
             """
-            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1]\n")
-            i = input()             #Todo input überprüfen
+            print("Du triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1] ?")
+            i = input()
+            while not check.inlist(i,[1,2]):
+                i = input()
             if i == "2":
                 x = randint(2,3)    #x ist ein random int von 1 bis 3
                 if x == 1:          #33% chance das man es schafft
@@ -404,30 +406,36 @@ class spiel():
         print(self.credits)
     def start(self):                                    #Startet das Spiel
         print(asciiart.title)
-        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen? \n")       #eingabe des spielernamens
+        self.eingabe= input("Hey Ihr da, endlich seid ihr Wach... \nWie darf ich dich nennen? \n")      #eingabe des spielernamens
+        while not check.string(self.eingabe):
+            self.eingabe = input()
         LocalSpieler=spieler(self.eingabe, asciiart.spieler)                                            #der Spieler Wird erstellt
         print("OK", LocalSpieler.name, "......\nDie Welt steht dir offen.")
         while self.lustvomspieler == 1:                                                                 #hauptschleife des Spiels
-            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n") #todo input überprüfen
+            self.eingabe = input("Willst du die Welt[1] erkunden oder in den Dorfladen[2] gehen?\nOder du nimmst dir das Leben[666]\n")
+            while not check.inlist(self.eingabe,[1,2,666]):
+                self.eingabe = input()
             if self.eingabe == "1":
               welt.weltenauswahl(Welten,LocalSpieler)       #Die weltenauswahl wird gfestartet mit der Liste aller welten und dem Spielernamen
             elif self.eingabe == "2":
                 self.shop(LocalSpieler)                     #der Shop wird geöffnet und der Spilername wird übergeben
             elif self.eingabe == "666":
-                self.lustvomspieler = 666                   #der Spiler hat keine Lust mehr und die bedinung der Hauptschleife wird verändert
+                self.lustvomspieler = 666                   #der Spieler hat keine Lust mehr und die bedinung der Hauptschleife wird verändert
 
         # Der Spieler ist tot wenn die Schleife Unterbrochen wurde
         self.ende()
     """
     Der Shop ist eine Methode der Klasse Spiel. Bei der Ausführung muss der name des Spielers übergben werden.
-    Der Shop ist ein Shop indem der Spiener dinge kaufen kann.
+    Der Shop ist ein Shop indem der Spieler dinge kaufen kann.
     """
     def shop(self,Spieler):
         print(asciiart.seitenumbruch,"Hey Hey Hey.....\n Was begiert deine Seele??")
         for i in range(200):        #Eine Schleife für den Shop (nach 200 einkäufen am stück muss dann auch schluss sein
             print(asciiart.shop)    #Darstellung der asciiart mit gegenständen und preisen
             print("Du hast ", Spieler.geld," Gold.")
-            self.eingabe = input("\n")
+            self.eingabe = input()
+            while not check.inlist(self.eingabe, [1,2,3,4,5,6,7]):
+                self.eingabe = input()
             if self.eingabe == "1":                             #Auswahl des spielers finden
                 if check.konto(Spieler, 10) == True:            #Konto des Spilers checken
                     Spieler.geld = Spieler.geld - 10            #Geld abziehen
@@ -449,7 +457,7 @@ class spiel():
             elif self.eingabe == "4":
                 if check.konto(Spieler, 666) == True:
                     Spieler.geld = Spieler.geld - 666
-                    print("****Herzlichen Glückwunsch du bist jetzt der stolze besitzer eines 5G-Schildes****")
+                    print("**** Herzlichen Glückwunsch du bist jetzt der stolze besitzer eines 5G-Schildes. \nDie Echsenmenschen werden dir nun nichts mehr anhaben können ****")
                 else:
                     check.keingeld()
             elif self.eingabe == "5":
@@ -470,11 +478,8 @@ class spiel():
                     print("Du hast zuviel gespendet! DU HAST JETZT KEIN BLUT MEHR!!!!")
                     Spieler.sterben()
                     break
-
             elif self.eingabe == "7":
                 break
-            else:
-                print("Das ist leider nicht verfügbar.")
 
 """
 Definieren der Welten und Monster
