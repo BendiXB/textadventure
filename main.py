@@ -274,6 +274,7 @@ class welt():
             der den ersten Schlag landet. 
             Dabei wird das "opfer" und und der gegnermult übergeben.
             """
+            print(nextgegner.asciiart+'\n')
             print("\nDu triffst einen ", nextgegner.name, "\nWillst du wegrennen[2] oder ihn angreifen[1] ?")
             i = input()
             while not check.inlist(i,[1,2]):
@@ -443,7 +444,7 @@ class spiel():
                     Spieler.geld = Spieler.geld - 10            # Geld abziehen
                     spieler.schaden = spieler.schaden + 5       # Efekt des kaufs
                 else:                                           # sonst
-                    check.keingeld()                            #Aufrufen von Kein geld
+                    check.keingeld()                            # Aufrufen von Kein geld
             elif self.eingabe == "2":  # Panzer
                 if check.konto(Spieler, 15) == True:
                     Spieler.geld = Spieler.geld - 15
