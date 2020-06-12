@@ -264,18 +264,7 @@ class welt():
               "Gegner besigen bis du den Loot bekommst.\ndafür bekommst du aber auch die ", self.lootmult,
               "fache Menge an Beute.")                  #printet allgemeine infos für den spieler
         for i in range(self.gegnerbisloot):             #schleife für gegnerauswahl und zeuteilung eines random gegners
-            x = randint(1,5)                            # random int für den Zufälligen gegner
-            if x == 1:
-                nextgegner = Monster1                   #next gegner wird ein Monster zugeteilt todo optimieren
-            elif x == 2:
-                nextgegner = Monster2
-            elif x == 3:
-                nextgegner = Monster3
-            elif x == 4:
-                nextgegner = Monster4
-            elif x == 5:
-                nextgegner = Monster5
-
+            nextgegner = choice(Monster)                # next gegner wird ein Monster zugeteilt
 
             """
             gibt den Nächsten gegner aus und fragt ist für die wegrennen mechanik verantwortlich.
@@ -502,6 +491,7 @@ Monster2 = monster("Baer", asciiart.baer, 20, 8)
 Monster3 = monster("Drache", asciiart.drache, 30, 20 )
 Monster4 = monster("Kaktus", asciiart.kaktus, 30, 1)
 Monster5 = monster("Fuchs", asciiart.fuchs, 10, 5)
+Monster = [Monster1,Monster2,Monster3,Monster4,Monster5]
 World1 = welt("Wald",1,0.5,3)
 World2 = welt("Berge",2,1,3)
 World3 =  welt("Fluss", 3,2,3)
