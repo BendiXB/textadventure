@@ -358,11 +358,10 @@ class spieler(wesen):
         self.gestorben = False
         super().__init__( name,  asciiart)              # Erbt das von Wesen
     def sterben(self):                                  # nach dem Tod bekommt der Spieler eine 2te chance aber ist 20% schwächer
-        self.gestorben = False                          #  zurücksezten der Variable auf False
+        self.gestorben = False                          # zurücksezten der Variable auf False
         self.leben = 20
         self.maxleben = self.maxleben*0.8               # Maxleb und Maxschaden um 20% schwächer machen
         self.schaden = self.schaden*0.8
-        print(asciiart.seitenumbruch)
         print(asciiart.grab)
         print("\n\n\n Du bist gestorben. Deine Eingeweide werden von einem Hobbyalchemisten aufgelesen \n und mit einer Schnecke gekreuzt. Dadurch lebst du wieder, verlierst aber 20% deiner Staerke!!\n\n\n")
 
@@ -439,6 +438,7 @@ class spiel():
             self.eingabe = input()
             while not check.inlist(self.eingabe, [1,2,3,4,5,6,7]):
                 self.eingabe = input()
+            print(asciiart.seitenumbruch)                       # Fenster klären
             if self.eingabe == "1": # Schwert                   # Auswahl des spielers finden
                 if check.konto(Spieler, 10) == True:            # Konto des Spielers checken
                     Spieler.geld = Spieler.geld - 10            # Geld abziehen
@@ -470,10 +470,10 @@ class spiel():
                 else:
                     check.keingeld()
             elif self.eingabe == "6":  # Blut spenden
-                print("Dake das du dein Blut bereitstellst")
+                print("Danke, dass du dein Blut bereitstellst")
                 Spieler.leben=Spieler.leben - 1
                 Spieler.geld=Spieler.geld+2
-                print(Spieler.leben)
+                print(Spieler.leben,'Leben hast du noch')
                 if randint(1,20) == 14: # Mit einer Changse von 1:20 Stirbt der Spieler beim Blutspenden
                     print("Die Nadel war dreckig\nUPS sorry\n\nDu stirbst leider einen qualvollen Tod mit Blutvergiftung")
                     Spieler.sterben()
