@@ -442,13 +442,13 @@ class spiel():
             if self.eingabe == "1": # Schwert                   # Auswahl des spielers finden
                 if check.konto(Spieler, 10) == True:            # Konto des Spielers checken
                     Spieler.geld = Spieler.geld - 10            # Geld abziehen
-                    spieler.schaden = spieler.schaden + 5       # Efekt des kaufs
+                    Spieler.schaden = Spieler.schaden + 5       # Efekt des kaufs
                 else:                                           # sonst
                     check.keingeld()                            # Aufrufen von Kein geld
             elif self.eingabe == "2":  # Panzer
                 if check.konto(Spieler, 15) == True:
                     Spieler.geld = Spieler.geld - 15
-                    spieler.maxleben = spieler.maxleben + 10
+                    Spieler.maxleben = Spieler.maxleben + 10
                 else:
                     check.keingeld()
             elif self.eingabe == "3":  # Suppe
