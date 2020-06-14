@@ -260,7 +260,7 @@ class welt():
     erkunden ist eine Methode von Welt. Sie bekommt den Spielernamen übergeben und Startet die keämpfe mit gegnern.
     """
     def erkunden(self, spieler):
-        print("\nDu bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
+        print(asciiart.seitenumbruch+"\nDu bist im:", self.name, "\nDu musst ", self.gegnerbisloot,
               "Gegner besigen bis du den Loot bekommst.\ndafür bekommst du aber auch die ", self.lootmult,
               "fache Menge an Beute.")                  # printet allgemeine infos für den spieler
         for i in range(self.gegnerbisloot):             # schleife für gegnerauswahl und zeuteilung eines random gegners
