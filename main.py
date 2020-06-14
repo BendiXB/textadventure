@@ -439,7 +439,7 @@ class spiel():
             self.eingabe = input()
             while not check.inlist(self.eingabe, [1,2,3,4,5,6,7]):
                 self.eingabe = input()
-            if self.eingabe == "1": # Schwert                     # Auswahl des spielers finden
+            if self.eingabe == "1": # Schwert                   # Auswahl des spielers finden
                 if check.konto(Spieler, 10) == True:            # Konto des Spielers checken
                     Spieler.geld = Spieler.geld - 10            # Geld abziehen
                     spieler.schaden = spieler.schaden + 5       # Efekt des kaufs
@@ -474,10 +474,10 @@ class spiel():
                 Spieler.leben=Spieler.leben - 1
                 Spieler.geld=Spieler.geld+2
                 print(Spieler.leben)
-                if randint(1,20) == 14:
+                if randint(1,20) == 14: # Mit einer Changse von 1:20 Stirbt der Spieler beim Blutspenden
                     print("Die Nadel war dreckig\nUPS sorry\n\nDu stirbst leider einen qualvollen Tod mit Blutvergiftung")
                     Spieler.sterben()
-                if Spieler.leben <= 0:
+                if Spieler.leben <= 0:  # Da der Spieler beim Blutspenden Leben verliert stirbt er wenn er keines mehr hat
                     print("Du hast zuviel gespendet! DU HAST JETZT KEIN BLUT MEHR!!!!")
                     Spieler.sterben()
                     break
