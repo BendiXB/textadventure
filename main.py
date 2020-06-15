@@ -455,7 +455,6 @@ class spiel():
                 if check.konto(Spieler, 5) == True:
                     Spieler.geld = Spieler.geld - 5
                     Spieler.leben = Spieler.maxleben
-                    print(Spieler.maxleben, "= Max Leben    ", Spieler.leben,"Spieler Leben")
                 else:
                     check.keingeld()
             elif self.eingabe == "4":  # 5G Mist
