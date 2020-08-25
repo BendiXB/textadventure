@@ -1,6 +1,6 @@
 <!-- language: lang-none -->
 
-## Ein einfaches Textadventure, doch villeicht steckt mehr dahinter.
+## Ein einfaches Textadventure, doch vielleicht steckt mehr dahinter.
 
 ![bilder/demo.gif](bilder/demo.gif)
 
